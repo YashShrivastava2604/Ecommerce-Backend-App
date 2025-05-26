@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <!-- Flash Message -->
+    <% if (success.length>0) { %>
+        <div class="fixed bottom-0 right-0 w-1/4 bg-green-500 text-white text-center p-4 z-50 rounded">
+            <%= success %>
+        </div>
+    <% } %>
+    <% if (error.length>0) { %>
+        <div class="fixed bottom-0 right-0 w-1/4 bg-red-500 text-white text-center p-4 z-50 rounded">
+            <%= error %>
+        </div>
+    <% } %>
+    <!-- Container -->
+    <div class="w-full h-screen overflow-hidden" style="font-family: 'Arial Rounded MT', sans-serif;">
+        <!-- LOGO -->
+        <div class="w-full h-[3rem]">
+            <p class="text-xl pt-2 pl-2"> Scatch</p>
+        </div>
+        <!-- MAIN-CONTAINER -->
+        <div class="flex w-full h-full gap-3 overflow-hidden">
+            <!-- WELCOME/CREATE -->
+            <div class="w-1/2 flex flex-col justify-center items-center tracking-wider">
+                <div class="w-1/2">
+                    <p class="text-[2.1rem]">welcome to <span class="text-blue-500">Scatch</span></p>
+                    <p class="text-[1.5rem]">create your account</p>
+                </div>
+                <form action="/user/register" method="post" class="flex flex-col items-start pt-4 gap-3 w-1/2">
+                    <input type="text" name="name" placeholder="Full Name" class="w-full border border-gray-300 bg-gray-100 rounded-md p-2" required>
+                    <input type="email" name="email" placeholder="Email" class="w-full border border-gray-300 bg-gray-100 rounded-md p-2" required>
+                    <input type="password" name="password" placeholder="Password" class="w-full border border-gray-300 bg-gray-100 rounded-md p-2" required>
+                    <input type="submit" value="Create My Account" class="bg-blue-500 text-white rounded-md py-2 px-4 cursor-pointer hover:bg-blue-600 hover:shadow-lg transition duration-200 ease-in-out">
+                </form>
+            </div>
+            <!-- LOGIN -->
+            <div class="w-1/2 flex flex-col justify-center items-center tracking-wider">
+                <div class="w-1/2">
+                    <p class="text-[1.5rem]">Login Your Account</p>
+                </div>
+                <form action="/user/login" method="post" class="flex flex-col items-start pt-4 gap-3 w-1/2">
+                    <input type="email" name="email" placeholder="Email" class="w-full border border-gray-300 bg-gray-100 rounded-md p-2" required>
+                    <input type="password" name="password" placeholder="Password" class="w-full border border-gray-300 bg-gray-100 rounded-md p-2" required>
+                    <input type="submit" value="Login" class="bg-blue-500 text-white rounded-md py-2 px-4 cursor-pointer hover:bg-blue-600 hover:shadow-lg transition duration-200 ease-in-out">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

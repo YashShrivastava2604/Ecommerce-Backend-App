@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+<body>
+    <div class="w-full h-screen overflow-hidden" style="font-family: 'Arial Rounded MT', sans-serif;">
+        <!-- LOGO -->
+        <% if (success.length>0) { %>
+            <div class="fixed bottom-0 right-0 w-1/4 bg-green-500 text-white text-center p-4 z-50 rounded">
+                <%= success %>
+            </div>
+        <% } %>
+        <div class="w-full h-[3rem]">
+            <%- include('partials/header') %>
+            <p class="text-xl pt-2 pl-2"> Scatch</p>
+        </div>
+        <!-- MAIN-CONTAINER -->
+        <div class="flex w-full h-full gap-3 overflow-hidden">
+            <!-- Navbar -->
+            <div class=" px-3 py-5 w-[22%] h-full bg-gray-100 flex flex-col  gap-4">
+                <!-- Sort By -->
+                <div class="w-full">
+                    <label for="sortOptions" class="text-lg font-semibold">Sort by </label>
+                    <select id="sortOptions" class=" mt-2 border border-gray-300 bg-gray-100 rounded-md p-2" onchange="location = this.value;">
+                        <option value="/shop?sort=popular">Popular</option>
+                        <option value="/shop?sort=priceLowToHigh">Price: Low to High</option>
+                        <option value="/shop?sort=priceHighToLow">Price: High to Low</option>
+                        <option value="/shop?sort=latest">Latest</option>
+                    </select>
+                </div>
+                <!-- Sort By -->
+                <div class="mt-5">
+                    <ul class="flex flex-col gap-2">
+                        <li>
+                            <a href="/shop/collections/new" class="text-blue-500 hover:underline">New Collection</a>
+                        </li>
+                        <li>
+                            <a href="/shop/collections/all" class="text-blue-500 hover:underline">All Products</a>
+                        </li>
+                        <li>
+                            <a href="/shop/collections/discounted" class="text-blue-500 hover:underline">Discounted Products</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Filter by -->
+            </div>
+
+            <!-- Bags -->
+            <div class="mb-5">
+                <!-- Selected Filter -->
+                <div class="flex flex-wrap p-5 w-full h-full overflow-y-auto ">
+                    <% products.forEach((product) => { %>
+                        <div class="w-[15rem] h-[20rem] bg-zinc-500 rounded-lg shadow-md flex flex-col m-2">
+                            <img src="data:image/jpeg;base64,<%=product.image.toString('base64')%>" alt="<%=product.name%>" class="w-full min-h-[70%] object-cover rounded-t-md">
+                            <div class="flex items-center justify-between h-[30%] w-full bg-[<%= product.panelcolor%>] text-[<%= product.textcolor%>] rounded-b-md px-2">
+                                <div class="w-[80%] ">
+                                    <h2 class="text-lg font-semibold mb-2  "><%=product.name%> </h2>
+                                    <p class=" mb-2"> ₹<%= product.price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) %> </p>
+                                </div>
+                                <div>
+                                    <a href="/addToCart/<%= product._id%>" class="text-[[<%= product.textcolor%>]]">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

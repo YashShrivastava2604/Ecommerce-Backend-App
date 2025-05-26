@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body style="font-family: 'Arial Rounded MT', sans-serif;">
+    <%- include('partials/header')%>
+
+    <!-- Main-Container -->
+    <div class="flex flex-col gap-9">
+        <% user.cart.forEach((item) => {%>
+            <div class="flex">
+                 <!-- Item to buy -->
+                <div class="w-[30%] h-full flex flex-col items-center overflow-auto</div>  mt-10">
+                    <div class="w-[20rem] bg-[<%=item.bgcolor%>]">
+                        <img class="h-[20rem] w-[20rem] bg-red-600" src="data:image/jpeg;base64, <%=item.image.toString('base64')%>" alt="Product's image">
+                        <div class="flex justify-between items-center w-[20rem] px-3 py-2 text-xl bg-[<%=item.bgcolor%>] text-[<%=item.textcolor%>]">
+                            <div><%=item.name%></div>
+                            <div class="flex gap-3 items-center">
+                                <span class="material-icons cursor-pointer">remove</span>
+                                <span>01</span>
+                                <span class="material-icons cursor-pointer">add</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center w-[20rem] px-3 py-2 bg-[<%=item.panelcolor%>] text-[<%=item.textcolor%>]">
+                            <div class="">Net Total</div>
+                            <div class=" text-2xl">₹<%=item.price%></div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="w-[70%] h-full overflow-y-auto mt-10">
+                    <div class="w-full flex flex-col">
+                        <div class="text-2xl font-semibold text-gray-800 px-3">
+                            Price Breakdown
+                        </div>
+                        <div class="flex items-center px-3 mt-6 mx-12 w-[21rem]">
+                            <div class="w-full">
+                                <div class="flex justify-between py-1">
+                                    <span>Total MRP</span>
+                                    <span>₹<%=item.price%></span>
+                                </div>
+                                <div class="flex justify-between py-1">
+                                    <span>Discount on MRP</span>
+                                    <span class="text-green-600">-₹<%=item.discount%></span>
+                                </div>
+                                <div class="flex justify-between py-1">
+                                    <span>Platform Fee</span>
+                                    <span>₹49</span>
+                                </div>
+                                <div class="flex justify-between py-1">
+                                    <span>Shipping Fee</span>
+                                    <span>₹39</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-3 border-gray-300 w-[50%]">
+                        <div class="flex justify-between font-bold text-lg w-[45%] ">
+                            <span>Total Amount</span>
+                            <span><%= (item.price)-(item.discount)+(49) + 39 %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%})%>
+    </div>
+
+</body>
+</html>
